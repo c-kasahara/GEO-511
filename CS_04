@@ -1,0 +1,22 @@
+---
+title: "Case Study 04"
+author: Candice Kasahara
+date: September 27, 2022
+output: github_document
+---
+
+## What is the full name of the destination airport farthest from any of the NYC airports in the flights table?
+
+library(dplyr)
+library(ggplot2)
+library(nycflights13)
+library(tidyverse)
+
+farthest_airports <- flights %>%
+arrange(desc(distance)) %>%
+slice_head(n=1) %>%
+left_join(airports, by = c("dest" = "faa")) %>%
+select(name) %>%
+as.character()
+
+farthest_airports
